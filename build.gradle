@@ -1,0 +1,45 @@
+buildscript {
+  ext.kotlin_version = '1.2.30'
+  repositories {
+    maven { url "https://plugins.gradle.org/m2/" }
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+  }
+}
+
+plugins {
+  id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    vertxVersion = "3.5.3"
+}
+
+group = 'de.tarent'
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'de.tarent.JavaVertxLab'
+    }
+}
+
+dependencies {
+    compile "io.vertx:vertx-core:$vertxVersion"
+    compile "io.vertx:vertx-web:$vertxVersion"
+    compile "io.vertx:vertx-web-client:$vertxVersion"
+    compile "io.vertx:vertx-web:$vertxVersion"
+    compile "io.vertx:vertx-config:$vertxVersion"
+    compile "io.vertx:vertx-hazelcast:$vertxVersion"
+    compile "io.vertx:vertx-health-check:$vertxVersion"
+    compile "io.vertx:vertx-shell:3.5.3"
+}
+
